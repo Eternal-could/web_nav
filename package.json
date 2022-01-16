@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "build" : "rm -rf dist && parcel build src/index.html --no-minify --public-url ."
+  },
+  "name": "web_nav",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Eternal-could/web_nav.git",
+  "author": "Eternal-could <20578466@qq.com>",
+  "license": "MIT"
+}
