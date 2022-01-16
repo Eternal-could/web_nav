@@ -122,6 +122,8 @@ var render = function render() {
     $siteList.find('li:not(.last)').remove();
     hashMap.forEach(function (node, index) {
         var $li = $('\n            <li>\n                <div class="site">\n                    <div class="logo">' + node.logo + '</div>\n                    <div class="link">' + simplifyUrl(node.url) + '</div>\n                    <div class="close">\n                        <svg class="icon">\n                            <use xlink:href="#icon-close"></use>\n                        </svg>\n                    </div>\n                </div>\n            </li>\n        ').insertBefore($lastLi);
+        var ali = Array.from(document.querySelectorAll("li>.site"));
+        ali[index].style.backgroundColor = randomColor(0.1);
         $li.on('click', function (e) {
             window.open(node.url);
         });
@@ -165,6 +167,22 @@ $(document).on('keypress', function (e) {
 $('input').on('keypress', function (e) {
     e.stopPropagation();
 });
+function randomColor(alpha) {
+    //判断有没有传入透明值，没有传入的话，随机生成0-1之间的小数
+    //Math.random()只能生成0-1之间的小数，不包含0跟1，Math.random()*10，是1-10之间的整数，除以10再四舍五入，就有可能得到0或者1.
+    alpha = alpha == undefined ? (Math.random() * 10 / 10).toFixed(1) : alpha;
+    //将参数转化成数值
+    alpha = Number(alpha);
+    //如果传入的参数是非数值，则让透明度为1
+    if (isNaN(alpha)) alpha = 1;
+    //颜色拼接
+    var color = "rgba(";
+    for (var i = 0; i < 3; i++) {
+        color += parseInt(Math.random() * 256) + ",";
+    }
+    color += alpha + ")";
+    return color;
+}
 },{}],"../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -194,7 +212,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '55356' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '55831' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

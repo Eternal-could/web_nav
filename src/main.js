@@ -34,6 +34,8 @@ const render = ()=>{
                 </div>
             </li>
         `).insertBefore($lastLi);
+        let ali = Array.from(document.querySelectorAll("li>.site")) ;
+        ali[index].style.backgroundColor = randomColor(0.1)
         $li.on('click',(e)=>{
             window.open(node.url);
         })
@@ -77,3 +79,19 @@ $(document).on('keypress', (e)=>{
 $('input').on('keypress',(e)=>{
     e.stopPropagation();
 })
+function randomColor(alpha){
+    //判断有没有传入透明值，没有传入的话，随机生成0-1之间的小数
+    //Math.random()只能生成0-1之间的小数，不包含0跟1，Math.random()*10，是1-10之间的整数，除以10再四舍五入，就有可能得到0或者1.
+    alpha = alpha==undefined? (Math.random()*10/10).toFixed(1) : alpha;
+    //将参数转化成数值
+    alpha=Number(alpha);
+    //如果传入的参数是非数值，则让透明度为1
+    if(isNaN(alpha)) alpha=1;
+    //颜色拼接
+    let color = "rgba(";
+    for(let i=0;i<3;i++){
+        color+=parseInt(Math.random()*256)+",";
+    }
+    color+= alpha+")";
+    return color;
+}
